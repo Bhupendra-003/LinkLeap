@@ -4,15 +4,11 @@ import { Outlet } from 'react-router-dom'
 
 function AppLayout() {
     return (
-        <div>
-            <main className='min-h-screen container'>
+        <div className='flex flex-col w-full' >
+            <main className='min-h-screen w-full'>
                 <Header />
                 <Outlet />
             </main>
-
-            <div className='p-10 text-center bg-gray-400 mt-10'>
-
-            </div>
         </div>
     )
 }
