@@ -1,0 +1,2 @@
+Faced difficulties in setting up supabase,
+-> Then I had to read docs and understand how to use its functions.

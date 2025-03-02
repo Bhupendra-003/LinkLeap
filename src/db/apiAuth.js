@@ -28,9 +28,16 @@ export async function signup({name, email, password}){
         email,
         password,
         options: {
-            name,
+            data: {
+                name
+            }
         }
     });
     if(error) throw new Error(error.message);
     return { data: data };
+}
+
+export async function logout(){
+    const {error} = await supabase.auth.signOut();
+    if(error) throw new Error(error.message);
 }

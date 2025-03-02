@@ -10,12 +10,20 @@ import {
    DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
-import { Link2, LogOut} from 'lucide-react'
+import { Link2, LogOut } from 'lucide-react'
+import { UrlState } from '@/context/context'
+import { logout } from '@/db/apiAuth'
+import useFetch from '@/hooks/use-fetch'
+import { CircleLoader } from 'react-spinners'
 
 
 const Header = () => {
    const navigate = useNavigate();
-   const user = false;
+   const { user, fetchUser } = UrlState()
+   console.log("user:", user);
+
+   const { loading, error, fn: fnLogout } = useFetch(logout)
+
 
    return (
       <nav className='w-full flex gap-8 justify-between items-center px-12 pr-24 py-4'>
@@ -32,17 +40,26 @@ const Header = () => {
                : <DropdownMenu>
                   <DropdownMenuTrigger>
                      <Avatar className='w-10 h-10'>
-                        <AvatarImage src="https://github.com/shadcn.png" />
-                        <AvatarFallback>BS</AvatarFallback>
+                        <AvatarImage src={""} />
+                        <AvatarFallback>{user?.user_metadata?.name[0]}</AvatarFallback>
                      </Avatar>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent>
-                     <DropdownMenuLabel>Bhupendra Singh</DropdownMenuLabel>
+                     <DropdownMenuLabel>{user?.user_metadata?.name}</DropdownMenuLabel>
                      <DropdownMenuSeparator />
                      <DropdownMenuItem><span><Link2 color='white' /></span>Links</DropdownMenuItem>
-                     <DropdownMenuItem className='text-red-400'><span><LogOut color='white' /></span>Log Out</DropdownMenuItem>
+                     <DropdownMenuItem onClick={
+                        () => {
+                           fnLogout().then(() => {
+                              fetchUser()
+                              navigate('/')
+                           })
+                        }
+                     } className='text-red-400'><span><LogOut color='white' /></span>Log Out</DropdownMenuItem>
                   </DropdownMenuContent>
+                  {loading ? <CircleLoader /> : null}
                </DropdownMenu>
+               
 
             }
          </div>
