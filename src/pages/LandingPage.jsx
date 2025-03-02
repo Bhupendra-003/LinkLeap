@@ -3,14 +3,19 @@ import ModernButton from '@/components/ui/ModernButton'
 import React, { useState } from 'react'
 import { Faq3Demo } from '@/components/FAQ'
 import { useNavigate } from 'react-router-dom'
+import Error from '@/components/error'
 
 function LandingPage() {
   const [longurl, setlongurl] = useState('')
+  const [error, setError] = useState('')
   const navigate = useNavigate();
 
   const handleShorten = (e) => {
     if(longurl){
       navigate(`/auth?createNew=${longurl}`)
+    }
+    else{
+      setError('Please enter a valid URL')
     }
   }
 
@@ -28,6 +33,7 @@ function LandingPage() {
         </h1>
 
       </div>
+      <Error message={error} />
       <form className='w-88 sm:w-148 flex items-center gap-4 sm:gap-8 flex-col sm:flex-row pb-24 sm:pb-48' action="">
         <Input
           value={longurl}
@@ -36,6 +42,7 @@ function LandingPage() {
           placeholder='Enter your link here'
           type='url'
         />
+        
         <div onClick={handleShorten}>
           <ModernButton value={'Shorten'} />
         </div>

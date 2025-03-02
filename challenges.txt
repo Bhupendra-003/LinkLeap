@@ -1,2 +1,5 @@
 Faced difficulties in setting up supabase,
 -> Then I had to read docs and understand how to use its functions.
+
+Problem in managing states, data fetching and rendering.
+-> Overcomed by trying multiple things and debugging by adding console.log.
