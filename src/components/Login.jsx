@@ -15,7 +15,7 @@ import Error from "./error";
 import * as Yup from "yup";
 import useFetch from "@/hooks/use-fetch";
 import {getCurrentUser, login} from "@/db/apiAuth";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
     const [errors, setErrors] = React.useState([]);
@@ -36,6 +36,8 @@ function Login() {
             setErrors({login: data.error.message || "Login failed"});
         }
         if(data && fetchError===null){ // if data is not null and fetchError is null, then login was successful
+            console.log("data:", data);
+            navigate("/dashboard");
             console.log("Login successful");
         }
     }, [data, fetchError]);
@@ -55,8 +57,6 @@ function Login() {
             });
             await schema.validate(formData, { abortEarly: false });
             await fnLogin();
-            navigate("/dashboard");
-            fetchUser();
         } catch (e) {
             const newErrors = {};
 
