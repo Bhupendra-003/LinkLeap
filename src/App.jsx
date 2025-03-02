@@ -5,6 +5,7 @@ import LandingPage from './pages/LandingPage'
 import Dashboard from './pages/Dashboard'
 import Link from './pages/Link'
 import Auth from './pages/Auth'
+import UrlProvider from './context/context'
 
 function App() {
 
@@ -32,7 +33,11 @@ function App() {
     }
   ])
 
-  return <RouterProvider router={router} />
+  return  (
+  <UrlProvider>
+    <RouterProvider router={router} />
+  </UrlProvider>
+  )
 }
 
 export default App

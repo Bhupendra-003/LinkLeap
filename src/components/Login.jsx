@@ -14,8 +14,8 @@ import { HashLoader } from "react-spinners";
 import Error from "./error";
 import * as Yup from "yup";
 import useFetch from "@/hooks/use-fetch";
-import login from "@/db/apiAuth";
-import { Navigate } from "react-router-dom";
+import {getCurrentUser, login} from "@/db/apiAuth";
+import { Navigate, useNavigate } from "react-router-dom";
 
 function Login() {
     const [errors, setErrors] = React.useState([]);
@@ -24,6 +24,8 @@ function Login() {
         password: "",
     });
     const {data, error: fetchError, loading, fn: fnLogin} = useFetch(login, formData)
+    const {fetchUser} = useFetch(getCurrentUser)
+    const navigate = useNavigate();
 
     React.useEffect(() => {
         console.log("fetch data:", data);
@@ -53,7 +55,8 @@ function Login() {
             });
             await schema.validate(formData, { abortEarly: false });
             await fnLogin();
-            Navigate("/dashboard");
+            navigate("/dashboard");
+            fetchUser();
         } catch (e) {
             const newErrors = {};
 
