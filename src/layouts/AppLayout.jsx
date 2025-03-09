@@ -1,6 +1,7 @@
 import Header from '@/components/Header'
 import React from 'react'
 import { Outlet } from 'react-router-dom'
+import { Toaster } from "@/components/ui/sonner"
 
 function AppLayout() {
     return (
@@ -8,6 +9,7 @@ function AppLayout() {
             <main className='min-h-screen w-full'>
                 <Header />
                 <Outlet />
+                <Toaster />
             </main>
         </div>
     )

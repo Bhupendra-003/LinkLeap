@@ -26,7 +26,7 @@ const Header = () => {
 
 
    return (
-      <nav className='w-full flex gap-8 justify-between items-center px-12 pr-24 py-4'>
+      <nav className='w-full flex gap-8 justify-between items-center px-12 pr-16 py-4'>
          <Link to='/'>
             <div className='flex gap-8 items-center'>
                <svg className='w-16 h-16'>
@@ -47,7 +47,7 @@ const Header = () => {
                   <DropdownMenuContent>
                      <DropdownMenuLabel>{user?.user_metadata?.name}</DropdownMenuLabel>
                      <DropdownMenuSeparator />
-                     <DropdownMenuItem><span><Link2 color='white' /></span>Links</DropdownMenuItem>
+                     <Link to='/dashboard'><DropdownMenuItem><span><Link2 color='white' /></span>Links</DropdownMenuItem></Link>
                      <DropdownMenuItem onClick={
                         () => {
                            fnLogout().then(() => {
