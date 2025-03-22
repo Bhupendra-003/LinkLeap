@@ -15,6 +15,8 @@ import useFetch from '@/hooks/use-fetch'
 import { getUrls } from '@/db/apiUrl'
 import { getCLick } from '@/db/apiClick'
 import LinkCard from '@/components/link-card'
+import { Dialog } from '@/components/ui/dialog'
+import CreateLink from '@/components/create-link'
 
 function Dashboard() {
 
@@ -65,12 +67,14 @@ function Dashboard() {
       </div>
       <div className='flex items-center mt-8 justify-between'>
         <h2 className='text-3xl font-extrabold'>My Links</h2>
-        <Button>Create</Button>
+        <CreateLink />
       </div>
       <div className='relative'>
         <Input value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className={'h-10 border-1 border-gray-700'} placeholder="Search your links here"></Input>
-        <div className='absolute top-2 right-2 p-1'><Filter size={18} /></div>
-        {error && <Error message={error?.message} />}
+        <div className='absolute top-2 right-2 p-1'>
+          <Filter size={18} />
+        </div>
+        {error && <Error className='mt-2' message={error?.message} />}
       </div>
       <div className='mt-8 flex flex-col gap-4'>
         {(filteredUrl || []).map((url, id) => {

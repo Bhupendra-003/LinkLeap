@@ -26,10 +26,10 @@ function LinkCard({ url, fetchUrls}) {
                 <div className='flex-1'>
                     <p className='text-2xl font-bold'>{url.title}</p>
                     <p className='mt-2 text-blue-300 font-bold text-xl hover:underline'>
-                        <a>{url?.customurl ? url?.customurl : url?.shorturl}</a>
+                        <a>{url?.custom_url ? url?.custom_url : url?.short_url}</a>
                     </p>
                     <p className='mt-2'>
-                        Original Url: <span className='ml-2 text-blue-500 hover:underline'>{url?.original}</span>
+                        Original Url: <span className='ml-2 text-blue-500 hover:underline'>{url?.original_url}</span>
                     </p>
                 </div>
 
@@ -38,7 +38,7 @@ function LinkCard({ url, fetchUrls}) {
                     <div className='flex items-center'>
                         <Button className='scale-90' variant='ghost'><Download /></Button>
                         <Button onClick={() => {
-                            navigator.clipboard.writeText(`${url?.shorturl}`)
+                            navigator.clipboard.writeText(`${url?.short_url}`)
                             toast("Copied")
                         }} className='scale-90' variant='ghost'><Copy /></Button>
                         <Button onClick={() => (delFn().then(()=>fetchUrls()))} className='scale-90' variant='ghost'>
