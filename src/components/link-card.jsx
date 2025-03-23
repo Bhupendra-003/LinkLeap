@@ -18,18 +18,18 @@ function LinkCard({ url, fetchUrls}) {
             <div className='w-full h-32 flex gap-8 rounded-lg bg-zinc-900 p-4'> 
 
                 {/* QR Image */}
-                <div className='overflow-hidden h-full w-24 p-1 bg-white'>
+                <div className='overflow-hidden h-full w-24 p-0.1 bg-white'>
                     <img className='w-full h-full object-cover' src={url?.qr} alt="QR" />
                 </div>
 
                 {/* Links */}
                 <div className='flex-1'>
-                    <p className='text-2xl font-bold'>{url.title}</p>
-                    <p className='mt-2 text-blue-300 font-bold text-xl hover:underline'>
-                        <a>{url?.custom_url ? url?.custom_url : url?.short_url}</a>
+                    <p className='text-2xl cursor-default font-bold'>{url.title}</p>
+                    <p className='mt-2 text-blue-300 font-bold cursor-pointer text-xl hover:underline'>
+                        <a>https://shortly.in/{url?.custom_url ? url?.custom_url : url?.short_url}</a>
                     </p>
-                    <p className='mt-2'>
-                        Original Url: <span className='ml-2 text-blue-500 hover:underline'>{url?.original_url}</span>
+                    <p className='mt-2 text-nowrap'>
+                        Original Url: <span className='cursor-pointer ml-2 text-blue-500 hover:underline'><a>{url?.original_url}</a></span>
                     </p>
                 </div>
 

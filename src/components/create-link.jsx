@@ -50,7 +50,7 @@ const CreateLink = () => {
 
     useEffect(() => {
         if (error === null && data?.[0]?.id) {
-            navigate(`/link${data[0].id}`);
+            navigate(`/link/${data[0].id}`);
         }
     }, [error, data, navigate]);
 
@@ -58,7 +58,8 @@ const CreateLink = () => {
         setErrors([]);
         try {
             await schema.validate(formValues, { abortEarly: false });
-
+            console.log('formValues: ', formValues);
+            
             const canvas = ref.current?.canvasRef?.current;
             if (!canvas) {
                 throw new Error("QR Code rendering failed.");
