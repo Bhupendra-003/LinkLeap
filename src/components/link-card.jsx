@@ -26,10 +26,10 @@ function LinkCard({ url, fetchUrls}) {
                 <div className='flex-1'>
                     <p className='text-2xl cursor-default font-bold'>{url.title}</p>
                     <p className='mt-2 text-blue-300 font-bold cursor-pointer text-xl hover:underline'>
-                        <a>https://shortly.in/{url?.custom_url ? url?.custom_url : url?.short_url}</a>
+                        <a href={url?.custom_url ? url?.custom_url : url?.short_url}>https://shortly.in/{url?.custom_url ? url?.custom_url : url?.short_url}</a>
                     </p>
                     <p className='mt-2 text-nowrap'>
-                        Original Url: <span className='cursor-pointer ml-2 text-blue-500 hover:underline'><a>{url?.original_url}</a></span>
+                        Original Url: <span className='cursor-pointer ml-2 text-blue-500 hover:underline'><a href={url?.original_url}>{url?.original_url}</a></span>
                     </p>
                 </div>
 
