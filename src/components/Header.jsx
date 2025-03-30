@@ -32,7 +32,7 @@ const Header = () => {
                <svg className='w-16 h-16'>
                   <image className='w-16 h-16' href="/logo.svg" alt="Logo" />
                </svg>
-               <h1 className='text-2xl font-bold'>SHORTLY</h1>
+               <h1 className='text-2xl font-bold'>LINKLEAP</h1>
             </div>
          </Link>
          <div>

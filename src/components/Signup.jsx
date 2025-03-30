@@ -80,7 +80,7 @@ function Signup() {
         <Card className="w-full">
             <CardHeader>
                 <CardTitle>Signup</CardTitle>
-                <CardDescription>Sign up to Shortly.</CardDescription>
+                <CardDescription>Sign up to LinkLeap.</CardDescription>
             </CardHeader>
             <CardContent>
                 <form>

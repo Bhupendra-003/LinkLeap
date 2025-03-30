@@ -48,7 +48,7 @@ function LinkCard({ url, fetchUrls }) {
                 <div className='flex-1'>
                     <p className='text-2xl cursor-default font-bold'>{url.title}</p>
                     <p className='mt-2 text-blue-300 font-bold cursor-pointer text-xl hover:underline'>
-                        <a href={link}>https://shortly.netlify.app/{link}</a>
+                        <a href={link}>https://linkleap.netlify.app/{link}</a>
                     </p>
                     <p className='mt-2 text-nowrap'>
                         Original Url: <span className='cursor-pointer ml-2 text-blue-500 hover:underline'><a href={url?.original_url}>{url?.original_url}</a></span>

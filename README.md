@@ -1,8 +1,8 @@
-# Shortly - URL Shortening Application
+# LinkLeap - URL Shortening Application
 
 ## Project Description
 
-Shortly is a modern web application built with React and Vite that allows users to shorten URLs quickly and easily. It leverages Supabase for the backend, providing user authentication, data storage, and link click tracking. The application offers a user-friendly interface built with Radix UI components and styled with Tailwind CSS, ensuring a responsive and consistent experience across devices.
+LinkLeap is a modern web application built with React and Vite that allows users to shorten URLs quickly and easily. It leverages Supabase for the backend, providing user authentication, data storage, and link click tracking. The application offers a user-friendly interface built with Radix UI components and styled with Tailwind CSS, ensuring a responsive and consistent experience across devices.
 
 ## Key Features
 
@@ -27,12 +27,12 @@ Shortly is a modern web application built with React and Vite that allows users 
 
 ## Setup Instructions
 
-To run Shortly locally, follow these steps:
+To run LinkLeap locally, follow these steps:
 
 1. **Clone the repository:**
    ```bash
    git clone <repository_url>
-   cd shortly
+   cd linkleap
    ```
 
 2. **Install dependencies:**
@@ -66,7 +66,7 @@ To run Shortly locally, follow these steps:
 ## Project Structure
 
 ```
-shortly/
+linkleap/
 ├── public/             # Public assets (images, etc.)
 ├── src/                # Source code
 │   ├── assets/         # Project assets (icons, logos)
