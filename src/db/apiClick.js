@@ -27,7 +27,7 @@ export const storeClicks = async ({ id, original_url }) => {
 
         window.location.href = original_url
     } catch (error) {
-        console.log('Error Recording Click: ', error);
+        
     }
 }
 

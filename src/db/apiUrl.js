@@ -7,12 +7,12 @@ export async function getUrls(user_id) {
         console.error("Error fetching URLs:", error);
         throw new Error("Unable to Load URL");
     }
-    console.log("URls from apiUrl", data)
+    
     return data;
 }
 export async function deleteUrl(id) {
     try {
-        console.log("Starting deleteUrl function for ID:", id);
+        
 
         // 1. Fetch file name (short_url) before deleting the URL entry
         const { data: fileData, error: fileError } = await supabase
@@ -31,10 +31,10 @@ export async function deleteUrl(id) {
             throw new Error("Short URL not found");
         }
 
-        console.log("Fetched short_url:", fileData.short_url);
+        
 
         // 2. Delete the URL entry from 'urls' table
-        console.log("Deleting URL entry from database...");
+        
         const { data, error } = await supabase.from("urls").delete().eq("id", id);
 
         if (error) {
@@ -42,11 +42,11 @@ export async function deleteUrl(id) {
             throw error;
         }
 
-        console.log("URL entry deleted successfully:", data);
+        
 
         // 3. Delete the corresponding QR file from Supabase Storage
         const filePath = `qr/qr-${fileData.short_url}`;
-        console.log("Attempting to delete file from storage:", filePath);
+        
 
         const { error: deleteError } = await supabase
             .storage
@@ -58,8 +58,8 @@ export async function deleteUrl(id) {
             throw deleteError;
         }
 
-        console.log("File deleted successfully from storage:", filePath);
-        console.log("URL and associated QR file deleted successfully");
+        
+        
 
         return data;
     } catch (err) {
@@ -80,7 +80,7 @@ export async function createUrl({ title, longUrl, customUrl, user_id }, qrcode) 
         throw new Error(`Storage Error: ${stroageError.message}`)
     }
     const qr = `${supabaseUrl}/storage/v1/object/public//qr/${fileName}`
-    console.log('longUrl:', longUrl);
+    
     const { data, error } = await supabase.from('urls').insert([
         {
             user_id,

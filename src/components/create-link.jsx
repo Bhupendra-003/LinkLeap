@@ -58,7 +58,7 @@ const CreateLink = () => {
         setErrors([]);
         try {
             await schema.validate(formValues, { abortEarly: false });
-            console.log('formValues: ', formValues);
+            
             
             const canvas = ref.current?.canvasRef?.current;
             if (!canvas) {

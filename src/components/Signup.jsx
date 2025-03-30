@@ -32,19 +32,19 @@ function Signup() {
     const longlink = searchParams.get('createNew')
 
     React.useEffect(() => {
-        console.log("fetch data:", data);
-        console.log("fetch error:", fetchError);
+        
+        
         if (fetchError) {
             setErrors({signup: fetchError.message || "Signup failed"});
         } else if (data && data.error) {
             setErrors({signup: data.error.message || "Signup failed"});
         }
         if(data && fetchError===null){ // if data is not null and fetchError is null, then Signup was successful
-            console.log("data:", data);
-            console.log("longlink:", longlink);
+            
+            
             navigate(`/dashboard?${longlink?`createNew=${longlink}` : ""}`);
             fetchUser()
-            console.log("Signup successful");
+            
         }
     }, [data, fetchError]);
 
@@ -54,7 +54,7 @@ function Signup() {
     };
 
     const handleSignup = async () => {
-        console.log("Signup button clicked");
+        
         setErrors([]);
         try {
             const schema = Yup.object().shape({
@@ -69,7 +69,7 @@ function Signup() {
 
             e?.inner?.forEach((err) => {
                 newErrors[err.path] = err.message;
-                console.log(err);
+                
             });
 
             setErrors(newErrors);

@@ -22,7 +22,7 @@ function Dashboard() {
 
   const [searchQuery, setSearchQuery] = useState('')
   const { user } = UrlState()
-  console.log("User in Dashboard: ", user)
+  
   const { loading, error, data: urls, fn: fnUrls } = useFetch(getUrls, user?.id)
 
   const { loading: loadingClick, data: clicks, fn: fnClicks } = useFetch(

@@ -20,7 +20,7 @@ import { CircleLoader } from 'react-spinners'
 const Header = () => {
    const navigate = useNavigate();
    const { user, fetchUser } = UrlState()
-   console.log("user:", user);
+   
 
    const { loading, error, fn: fnLogout } = useFetch(logout)
 

@@ -29,18 +29,18 @@ function Login() {
     const navigate = useNavigate();
 
     React.useEffect(() => {
-        console.log("fetch data:", data);
-        console.log("fetch error:", fetchError);
+        
+        
         if (fetchError) {
             setErrors({login: fetchError.message || "Login failed"});
         } else if (data && data.error) {
             setErrors({login: data.error.message || "Login failed"});
         }
         if(data && fetchError===null){ // if data is not null and fetchError is null, then login was successful
-            console.log("data:", data);
+            
             fetchUser();
             navigate("/dashboard");
-            console.log("Login successful");
+            
         }
     }, [data, fetchError]);
 
@@ -50,7 +50,7 @@ function Login() {
     };
 
     const handleLogin = async () => {
-        console.log("Login button clicked");
+        
         setErrors([]);
         try {
             const schema = Yup.object().shape({
@@ -64,7 +64,7 @@ function Login() {
 
             e?.inner?.forEach((err) => {
                 newErrors[err.path] = err.message;
-                console.log(err);
+                
             });
 
             setErrors(newErrors);

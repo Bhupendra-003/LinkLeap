@@ -1,17 +1,17 @@
 import React from 'react'
 import { UrlState } from '@/context/context'
-import { useParams } from 'react-router-dom'
-import { useNavigate } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { BarLoader, BeatLoader } from 'react-spinners'
 import { useEffect } from 'react'
 import useFetch from '@/hooks/use-fetch'
 import { getUrl, deleteUrl } from '@/db/apiUrl'
 import { getClicksForUrl } from '@/db/apiClick'
-import { LinkIcon } from 'lucide-react'
+import { LinkIcon, Copy, Download, Trash } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { Copy, Download, Trash } from 'lucide-react'
 import { toast } from 'sonner';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
+import Location from '@/components/location-stats'
+import Device from '@/components/device-stats'
 
 function Link() {
   const { user } = UrlState();
@@ -36,8 +36,9 @@ function Link() {
     fn();
     fnStats();
   }, []);
+  
   if (error) {
-    return <div className="text-red-500">{error.message}</div>;
+    return <div className="text-red-500 p-4">{error.message}</div>;
   }
 
   let link = url?.custom_url ? url?.custom_url : url?.short_url;
@@ -62,20 +63,40 @@ function Link() {
   };
 
   return (
-    <>
+    <div className="container mx-auto px-4 py-6">
       {(loading || loadingStats) && (
         <BarLoader className="mb-4" width={"100%"} color="#36d7b7" />
       )}
-      <div className="flex mx-24 flex-col gap-8 sm:flex-row justify-between">
-        <div className="flex flex-col items-start gap-8 rounded-lg sm:w-2/5">
-          <span className="text-6xl font-extrabold hover:underline cursor-pointer">{url?.title}</span>
-          <a href={`https://shortly/${link}`} className="text-3xl sm:text-4xl text-blue-400 font-bold hover:underline cursor-pointer" target="_blank">https://shortly/{link}</a>
-          <a href={`${url?.original_url}`} className="flex items-center gap-1 hover:underline cursor-pointer" target="_blank">
-            <LinkIcon className="p-1" />
-            {url?.original_url}</a>
-          <span className="flex items-end font-light text-sm">{new Date(url?.created_at).toLocaleString()}</span>
+      
+      <div className="flex flex-col lg:flex-row gap-8">
+        {/* Left side - URL info */}
+        <div className="flex flex-col items-start gap-4 w-full lg:w-2/5">
+          <h1 className="text-3xl md:text-4xl lg:text-6xl font-extrabold hover:underline cursor-pointer break-words">
+            {url?.title}
+          </h1>
+          
+          <a 
+            href={`https://shortly.netlify.app/${link}`} 
+            className="text-xl sm:text-2xl md:text-3xl text-blue-400 font-bold hover:underline cursor-pointer break-all" 
+            target="_blank"
+          >
+            https://shortly.netlify.app/{link}
+          </a>
+          
+          <a 
+            href={`${url?.original_url}`} 
+            className="flex items-center gap-1 hover:underline cursor-pointer text-sm md:text-base break-all" 
+            target="_blank"
+          >
+            <LinkIcon className="flex-shrink-0 p-1" />
+            <span className="break-all">{url?.original_url}</span>
+          </a>
+          
+          <span className="flex items-end font-light text-xs sm:text-sm">
+            {new Date(url?.created_at).toLocaleString()}
+          </span>
+          
           <div className="flex gap-2">
-
             <Button
               variant="ghost"
               onClick={async () => {
@@ -91,11 +112,10 @@ function Link() {
               <Copy />
             </Button>
 
-
-
             <Button variant="ghost" onClick={downloadImage}>
               <Download />
             </Button>
+            
             <Button
               variant="ghost"
               onClick={() => {
@@ -103,7 +123,7 @@ function Link() {
                   navigate("/dashboard");
                 })
               }}
-              disable={loadingDelete}
+              disabled={loadingDelete}
             >
               {loadingDelete ? (
                 <BeatLoader size={5} color="white" />
@@ -112,46 +132,62 @@ function Link() {
               )}
             </Button>
           </div>
-          <img
-            src={url?.qr}
-            className="w-96 self-center sm:self-start ring ring-blue-500 p-1 object-contain"
-            alt="qr code"
-          />
+          
+          <div className="w-full flex justify-center lg:justify-start">
+            <img
+              src={url?.qr}
+              className="w-full max-w-xs sm:max-w-sm ring ring-blue-500 p-1 object-contain"
+              alt="QR code"
+            />
+          </div>
         </div>
-        <Card className="sm:w-3/5">
+
+        {/* Right side - Stats */}
+        <Card className="w-full lg:w-3/5">
           <CardHeader>
-            <CardTitle className='font-bold text-3xl'>Stats</CardTitle>
+            <CardTitle className="font-bold text-2xl md:text-3xl">Stats</CardTitle>
             <CardDescription>Card Description</CardDescription>
           </CardHeader>
+          
           {stats && stats.length ? (
             <CardContent>
-            <Card>
-              <CardHeader>
-                <CardTitle className='text-2xl'>Total Clicks</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className='text-xl'>{stats?.length || 0}</p>
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-xl md:text-2xl">Total Clicks</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-lg md:text-xl">{stats?.length || 0}</p>
+                </CardContent>
+              </Card>
+
+              <CardTitle className="my-4 font-bold text-2xl md:text-3xl">
+                Location Data
+              </CardTitle>
+              <CardTitle>
+                Location Info
+              </CardTitle>
+              <CardContent className="my-4">
+                <Location stats={stats} /> {/* Displaying Location Graph */}
               </CardContent>
-            </Card>
-
-            <CardTitle>
-              Location Data
-            </CardTitle>
-            <CardTitle>
-              Device Info
-            </CardTitle>
-
-            {/* If no Clicks */}
-          </CardContent>
+              
+              <CardTitle className="my-4 font-bold text-2xl md:text-3xl">
+                Device Data
+              </CardTitle>
+              <CardTitle>
+                Device Info
+              </CardTitle>
+              <CardContent className="my-4">
+                <Device stats={stats} /> {/* Displaying Device Graph */}
+              </CardContent>
+            </CardContent>
           ) : (
             <CardContent>
               {!loading ? "No Stats Yet" : "Loading"}
             </CardContent>
           )}
-          
         </Card>
       </div>
-    </>
+    </div>
   )
 }
 

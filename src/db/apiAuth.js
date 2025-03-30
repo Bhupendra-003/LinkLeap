@@ -5,8 +5,8 @@ export async function login({email, password}){
         email,
         password
     })
-    console.log("supabase response data:", data);
-    console.log("supabase response error:", error);
+    
+    
     if (error) {
         throw new Error(error.message);
     }
